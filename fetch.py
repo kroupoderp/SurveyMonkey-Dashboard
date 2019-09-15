@@ -14,11 +14,28 @@ def query():
     return json_frmt
 
 def getSurveys():
-    resp = query()
-    surveys = []
-    for survey in resp["data"]:
-        surveys.append(survey["title"])
-    return surveys
+	    resp = query()
+	    surveys = {}
+	    for survey in resp["data"]:
+	        surveys[survey["title"]] = survey["id"]
+	    return surveys
+	
+def getQuestions(survey_id):
+    questions = []
+    d = requests.get(url + f'/{survey_id}/details', headers=request_headers).text
+    json_frmt = json.loads(d)
+
+    if len(json_frmt["pages"]) == 1:
+        print("EXECUTED")
+        for dataset in json_frmt["pages"][0]["questions"]:
+            questions.append(dataset["headings"][0]["heading"])
+        return questions
+    else:
+        for page in json_frmt["pages"]:
+            for dataset in page["questions"]:
+                questions.append(dataset["headings"][0]["heading"])
+        return questions
+
 
 if __name__ == "__main__":
-    getSurveys()
+    print(getQuestions("188231210"))

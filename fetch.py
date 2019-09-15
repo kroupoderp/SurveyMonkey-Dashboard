@@ -27,7 +27,6 @@ def getQuestions(survey_id):
     json_frmt = json.loads(d)
 
     if len(json_frmt["pages"]) == 1:
-        print("EXECUTED")
         for dataset in json_frmt["pages"][0]["questions"]:
             questions.append(dataset["headings"][0]["heading"])
         return questions
@@ -37,3 +36,5 @@ def getQuestions(survey_id):
                 questions.append(dataset["headings"][0]["heading"])
         return questions
 
+if __name__ == "__main__":
+    print(getQuestions())

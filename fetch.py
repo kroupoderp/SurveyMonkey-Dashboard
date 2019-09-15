@@ -3,6 +3,7 @@ import requests, json
 access_token = 'xGXDyPakeNjQedIC4BTUQcgjknJ-MK-s.0x0Ap51iGOXnNHDjYPGDTkt6PSEycjqvlNEspmq0s2gbzkMXQnD.4n2AnQ9G2DsYjhaiFFYMCJcCM.87kITTBft8YHHCfOi'
 url = "https://api.surveymonkey.com/v3/surveys"
 
+
 request_headers = {
     'Content-Type': "application/json",
     'Authorization': f'bearer {access_token}'
@@ -36,6 +37,3 @@ def getQuestions(survey_id):
                 questions.append(dataset["headings"][0]["heading"])
         return questions
 
-
-if __name__ == "__main__":
-    print(getQuestions("188231210"))

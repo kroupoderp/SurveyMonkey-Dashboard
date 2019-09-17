@@ -1,7 +1,18 @@
 {% extends "layout.html" %}
 
 {% block content %}
-    {% for question in questions %}
-        <h1>{{question}}</h1>
-    {% endfor %}
+    <div class="container">
+        {% for row in questions | batch(3) %}
+            <div class="row">
+                {% for question in row %}
+                <div class="card col" style="width: 18rem;">
+                    <div class="graph-container"></div>
+                    <div class="card-body">
+                        <p class="card-text">{{question}}</p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>  
+        {% endfor %}
+    </div>
 {% endblock %}
